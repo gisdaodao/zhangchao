@@ -1,0 +1,67 @@
+﻿<AppBar
+    x:Class="OKr.Win8Book.Client.Controls.NavBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:OKr.Win8Book.Client.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:OKrControls="using:OKr.Win8Book.Client.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+
+    <Grid Style="{StaticResource AppBarBackgroundStyle}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel x:Name="LeftPanel" Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+            <OKrControls:ImageButton x:Name="btnHome" Margin="10,10,0,10" 
+                                    Style="{StaticResource ImageButtonStyle}" 
+                                    BackgroundNormal="/Assets/NavBar/NavHomeNormal.png"
+                                    BackgroundHover="/Assets/NavBar/NavHomeHover.png"
+                                    BackgroundPressed="/Assets/NavBar/NavHomePressed.png"
+                                    Click="OnHome"/>
+
+            <OKrControls:ImageButton x:Name="btnChapter"  Margin="10,10,0,10" 
+                                    Style="{StaticResource ImageButtonStyle}" 
+                                    BackgroundNormal="/Assets/NavBar/NavChaptersNormal.png"
+                                    BackgroundHover="/Assets/NavBar/NavChaptersHover.png"
+                                    BackgroundPressed="/Assets/NavBar/NavChaptersPressed.png"
+                                    Click="OnChapter"/>
+
+            <OKrControls:ImageButton x:Name="btnMark"  Margin="10,10,0,10" 
+                                    Style="{StaticResource ImageButtonStyle}" 
+                                    BackgroundNormal="/Assets/NavBar/NavMarkNormal.png"
+                                    BackgroundHover="/Assets/NavBar/NavMarkHover.png"
+                                    BackgroundPressed="/Assets/NavBar/NavMarkPressed.png"
+                                    Click="OnMark"/>
+        </StackPanel>
+        
+        <StackPanel x:Name="RightPanel" Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+            <StackPanel x:Name="btnPre" Margin="25,10,25,10" Visibility="Collapsed">
+                <OKrControls:ImageButton 
+                                    Style="{StaticResource ImageButtonStyle}" 
+                                    BackgroundNormal="/Assets/NavBar/NavPreNormal.png"
+                                    BackgroundHover="/Assets/NavBar/NavPreHover.png"
+                                    BackgroundPressed="/Assets/NavBar/NavPrePressed.png"
+                                    Click="OnPre" />
+                <TextBlock Text="上一章" Style="{StaticResource NavButtonTextStyle}"/>
+            </StackPanel>
+
+            <StackPanel x:Name="btnNext" Margin="25,10,25,10" Visibility="Collapsed">
+                <OKrControls:ImageButton 
+                                    Style="{StaticResource ImageButtonStyle}" 
+                                    BackgroundNormal="/Assets/NavBar/NavNextNormal.png"
+                                    BackgroundHover="/Assets/NavBar/NavNextHover.png"
+                                    BackgroundPressed="/Assets/NavBar/NavNextPressed.png"
+                                    Click="OnNext"/>
+                <TextBlock Text="上一章" Style="{StaticResource NavButtonTextStyle}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</AppBar>

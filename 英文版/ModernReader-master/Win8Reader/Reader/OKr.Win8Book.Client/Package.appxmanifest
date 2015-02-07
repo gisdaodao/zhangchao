@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="98334759-899B-4776-B416-863F94D1148A" Publisher="CN=Anytao" Version="1.0.0.9" />
+  <Properties>
+    <DisplayName>MXReader</DisplayName>
+    <PublisherDisplayName>Anytao</PublisherDisplayName>
+    <Logo>Assets\Data\Logo50x50.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="zh-cn" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="OKr.Win8Book.Client.App">
+      <VisualElements DisplayName="MXReader" Logo="Assets\Data\Logo150x150.png" SmallLogo="Assets\Data\Logo30x30.png" Description="A windows 8 text book reader." ForegroundText="light" BackgroundColor="#d74f2a" ToastCapable="true">
+        <DefaultTile ShowName="allLogos" WideLogo="Assets\Data\Logo310x150.png" />
+        <SplashScreen Image="Assets\Data\Logo620x300.png" BackgroundColor="#d74f2a" />
+        <InitialRotationPreference>
+          <Rotation Preference="landscape" />
+        </InitialRotationPreference>
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
