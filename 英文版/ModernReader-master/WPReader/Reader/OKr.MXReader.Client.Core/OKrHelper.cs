@@ -36,13 +36,13 @@ namespace OKr.MXReader.Client.Core
 
         public static void Feedback(string app, string version, string email)
         {
-            string subject = "【" + app + " v" + version + "】用户反馈";
-            string body = "你好，" + "\n\n" + "我是【" + app + "】用户，下面是我的一些建议：";
+            string subject = "【" + app + " v" + version + "feedback";
+            string body = "";
 
             EmailComposeTask task = new EmailComposeTask();
             task.Subject = subject;
             task.Body = body;
-            task.To = email;
+            task.To = "nan06jing06ok@hotmail.com";
             task.Show();
         }
 
@@ -54,16 +54,16 @@ namespace OKr.MXReader.Client.Core
 
         public static void Share(string app, string appId)
         {
-            string subject = "为你推荐一个很好的应用：" + app;
+            string subject = "" + app;
             string body;
 
             if (string.IsNullOrEmpty(appId))
             {
-                body = "赶快去微软市场下载这个好玩的应用【" + app + "】吧。" + "\n\n" + "来自[app.okr.me]";
+                body = "【" + app + "】。" + "\n\n" + "";
             }
             else
             {
-                body = "赶快去微软市场下载这个好玩的应用【" + app + "】吧， " + "http://windowsphone.com/s?appid=" + appId + "\n\n" + "来自[app.okr.me]";
+                body = "【" + app + "】" + "http://windowsphone.com/s?appid=" + appId + "\n\n" + "]";
             }
 
             EmailComposeTask task = new EmailComposeTask();

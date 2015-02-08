@@ -58,7 +58,7 @@ namespace OKr.MXReader.Client.View
             }
 
             this.tsRemind.IsChecked = this.set.IsNightMode;
-            this.tbRemind.Text = this.set.IsNightMode ? "开启" : "关闭";
+            this.tbRemind.Text = this.set.IsNightMode ? "Open" : "Close";
             this.tbIntro.Foreground = this.set.IsNightMode ? OkrBookConfig.WBrush : OkrBookConfig.BBrush;
 
             FontSet(this.set.FontSize);
@@ -155,7 +155,7 @@ namespace OKr.MXReader.Client.View
 
         private void OnRemindChecked(object sender, RoutedEventArgs e)
         {
-            this.tbRemind.Text = "开启";
+            this.tbRemind.Text = "Open";
 
             this.set.IsNightMode = true;
             this.set.Theme = "bbg-night.png";
@@ -173,7 +173,7 @@ namespace OKr.MXReader.Client.View
 
         private void OnRemindUnchecked(object sender, RoutedEventArgs e)
         {
-            this.tbRemind.Text = "关闭";
+            this.tbRemind.Text = "Close";
 
             this.set.IsNightMode = false;
             this.set.Theme = "bbg.png";
