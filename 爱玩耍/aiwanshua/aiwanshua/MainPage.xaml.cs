@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using Microsoft.Phone.Tasks;
 using System.Diagnostics;
 using 股票新闻;
+using System.IO.IsolatedStorage;
 
 namespace aiwanshua
 {
@@ -24,7 +25,7 @@ namespace aiwanshua
         {
             InitializeComponent();
             Pclient.OpenReadCompleted += Pclient_OpenReadCompleted;
-            Pclient.OpenReadAsync(new Uri("https://raw.githubusercontent.com/gisdaodao/MYPROJECT/master/data/recoomendapplist.xml", UriKind.Absolute));
+            Pclient.OpenReadAsync(new Uri("https://raw.githubusercontent.com/gisdaodao/MYPROJECT/master/data/yundongsahipindaquan.xml", UriKind.Absolute));
             indicator.Text = "请求中...";
             indicator.IsVisible = true;
             indicator.IsIndeterminate = true;
@@ -72,7 +73,47 @@ namespace aiwanshua
 
 
         }
+        IsolatedStorageSettings settings = IsolatedStorageSettings.ApplicationSettings;
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.IsNavigationInitiator == false && e.NavigationMode == NavigationMode.Back)
+            {
+                int i = 1;
+                if (!settings.Contains("ad"))
+                {
+                    settings.Add("ad", DateTime.Now.ToString("yyyy/mm/dd"));
+                    settings.Save();
+                    SetHIDE();
+                }
+                else
+                {
+                    string k = (string)settings["ad"];
+                   if(k==DateTime.Now.ToString("yyyy/mm/dd"))
+                   {
+                       SetHIDE();
+                   }
+                }
 
+            }
+            if (e.NavigationMode == NavigationMode.New)
+            {
+                   if(settings.Contains("ad"))
+                   {
+                       string k = (string)settings["ad"];
+                       if (k == DateTime.Now.ToString("yyyy/mm/dd"))
+                       {
+                           SetHIDE();
+                       }
+                   }
+            }
+            base.OnNavigatedTo(e);
+        }
+
+        private void SetHIDE()
+        {
+          //  googlead.Visibility = Visibility.Collapsed;
+            //throw new NotImplementedException();
+        }
         private void Border_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Border border = sender as Border;
@@ -82,6 +123,25 @@ namespace aiwanshua
             task.Uri = new Uri(info.dataurl, UriKind.RelativeOrAbsolute);
             task.Show();
 
+        }
+
+        private void googlead_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            DateTime time = DateTime.Now;
+            string str = time.ToString("yyyy/mm/dd");
+            if(!settings.Contains("ad"))
+            {
+                settings.Add("ad", str);
+                settings.Save();
+            }
+            else
+            {
+              if(str!=(string)settings["ad"])
+              {
+                  settings["ad"] = str;
+                  settings.Save();
+              }
+            }
         }
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
