@@ -1,0 +1,315 @@
+﻿<phone:PhoneApplicationPage xmlns:JiuYouWp8Ad="clr-namespace:JiuYouWp8Ad;assembly=JiuYouWp8Ad"  
+    x:Class="OKr.MXReader.Client.View.Home"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctrl="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:atloader="clr-namespace:At.Phone.Control.Loader;assembly=At.Phone.Control"
+    xmlns:atutils="clr-namespace:At.Phone.Common.Utils;assembly=At.Phone.Common"    
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                             xmlns:MsnAD="clr-namespace:MSNADSDK.AD;assembly=MSNADSDK"
+  xmlns:oxlad="clr-namespace:OpenXLive.Advertising;assembly=OpenXLive.Advertising"
+  
+    xmlns:SurfaceAdw="clr-namespace:SurfaceAd.SDK.WP;assembly=SurfaceAd.SDK.WP"
+    xmlns:google="clr-namespace:GoogleAds;assembly=GoogleAds"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
+    atutils:OkrTiltEffect.IsTiltEnabled="True"
+    shell:SystemTray.IsVisible="False">
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="indicator" />
+    </shell:SystemTray.ProgressIndicator>
+    <UserControl.Resources>
+        <DataTemplate x:Key="okr-panoheader">
+            <Image Stretch="None" RenderTransformOrigin="0,0" Height="46" Width="413" Margin="14,45,0,0">
+                <Image.RenderTransform>
+                    <CompositeTransform />
+                </Image.RenderTransform>
+            </Image>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="{StaticResource okr-color-base}">
+        <Rectangle Fill="{StaticResource okr-color-title}" x:Name="title" Height="70" VerticalAlignment="Top" RenderTransformOrigin="0,0">
+            <Rectangle.RenderTransform>
+                <CompositeTransform />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <ctrl:Panorama x:Name="pano" TitleTemplate="{StaticResource okr-panoheader}" SelectionChanged="pano_SelectionChanged">
+            <ctrl:PanoramaItem Margin="12,10,0,0">
+                <Grid Margin="0,-28,-20,0" VerticalAlignment="Top" >
+
+                    <atloader:OkrLoader VerticalAlignment="Top" Margin="0,35,0,0" x:Name="loader" Text="loading..." />
+                    
+                    <TextBlock x:Name="tbName" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource okr-subtitle-yellow}" />
+
+                    <ScrollViewer Margin="12,80,0,20">
+                        <StackPanel MinHeight="650" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="adpanel">
+                           
+                            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <Button Click="OnShow" Style="{StaticResource okr-btn-noborder}" Height="320" Width="210"  Foreground="{StaticResource okr-color-dark}">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/_static/data/cover.png" />
+                                    </Button.Background>
+                                </Button>
+                                <Grid>
+                                    <TextBlock Margin="20,0,0,0" Style="{StaticResource okr-text}"><Run Text="作者：" /><Run x:Name="tbAuthor" /></TextBlock>
+
+                                    <Button Width="150" Click="OnShow" Content="我的阅读" Style="{StaticResource okr-btn-noborder}" Foreground="{StaticResource okr-color-dark}" VerticalAlignment="Bottom">
+                                        <Button.Background>
+                                            <ImageBrush Stretch="None" AlignmentX="Right" ImageSource="/_static/img/okr-arrow.png" />
+                                        </Button.Background>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>-->
+                            <Button Click="OnShow" Content="继续阅读" Style="{StaticResource okr-btn-noborder}" Foreground="{StaticResource okr-color-dark}" 
+                                    HorizontalAlignment="Left" Width="221" Height="43">
+                                <Button.Background>
+                                    <ImageBrush Stretch="None" ImageSource="/_static/img/okr-arrow.png" />
+                                </Button.Background>
+                            </Button>
+                            <TextBlock Margin="12" Style="{StaticResource okr-text}" TextWrapping="Wrap"><Run Text="作者：" /><Run x:Name="tbAuthor" /></TextBlock>
+                            <TextBlock x:Name="tbIntro" Margin="12,0,12,20" Style="{StaticResource okr-text}" Text="" TextWrapping="Wrap" />
+                            <MsnAD:AdView Visibility="Visible" Tap="AdtapControl_Tap"   x:Name="Ad15Control" Margin="0,0,0,0" TelCapability="True" StorePic="True" SecretKey="bfac44ffe5c0477a8f52060c9b09a1f1" Adid="191200"  Appid="145012" SizeForAd="Large"></MsnAD:AdView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </ctrl:PanoramaItem>
+
+            <ctrl:PanoramaItem Margin="12,10,0,0" Foreground="{StaticResource okr-color-blue}">
+                <!--<StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,-28,-12,0">
+                    <TextBlock Text="目录" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource okr-subtitle-yellow}" />
+                    <StackPanel Margin="12,10,12,10">
+                        <ListBox x:Name="clist" Height="630" />
+                    </StackPanel>
+                </StackPanel>-->
+                <Grid Margin="0,-28,-12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="目录" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource okr-subtitle-yellow}" />
+                    <ListBox x:Name="clist" Grid.Row="1" Margin="12,10,12,20" />
+                </Grid>
+            </ctrl:PanoramaItem>
+
+            <ctrl:PanoramaItem Margin="12,10,0,0" Foreground="{StaticResource okr-color-blue}">
+                <!--<StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,-28,-12,0">
+                    <TextBlock Text="书签" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource okr-subtitle-yellow}" />
+                    <StackPanel Margin="12,10,12,10">
+                        <ListBox x:Name="mlist" Height="630" />
+                    </StackPanel>
+                </StackPanel>-->
+                <Grid Margin="0,-28,-12,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="书签" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource okr-subtitle-yellow}" />
+                    <ListBox x:Name="mlist" Grid.Row="1" Margin="12,10,12,20"/>
+                </Grid>
+            </ctrl:PanoramaItem>
+
+            <ctrl:PanoramaItem Margin="12,10,0,0" Foreground="{StaticResource okr-color-blue}">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,-28,-12,0">
+                    <TextBlock Text="其他" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource okr-subtitle-yellow}" />
+
+                    <StackPanel Orientation="Vertical" Margin="12,10,12,20">
+
+                        <!--<StackPanel Height="90" Orientation="Horizontal">
+                            <StackPanel HorizontalAlignment="Left" Width="10" Margin="0,10,0,10" Background="{StaticResource okr-color-green}" />
+                            <Button Click="OnBooks" Style="{StaticResource okr-btn-noborder}">
+                                <Button.Content>
+                                    <StackPanel MinWidth="300" Orientation="Vertical" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="大家都在看" Style="{StaticResource okr-title-dark}" />
+                                        <TextBlock Style="{StaticResource okr-tip}"><Run Text="好阅的书架上，还有更多好书。" /></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>-->
+
+                        <StackPanel Height="90" Orientation="Horizontal" Margin="0,60,0,0">
+                            <StackPanel HorizontalAlignment="Left" Width="10" Margin="0,10,0,10" Background="{StaticResource okr-color-red}" />
+
+                            <Button Click="OnComment" Style="{StaticResource okr-btn-noborder}">
+                                <Button.Content>
+                                    <StackPanel MinWidth="300" Orientation="Vertical" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="评价" Style="{StaticResource okr-title-dark}" />
+                                        <TextBlock Style="{StaticResource okr-tip}"><Run Text="" /></TextBlock>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <!--<StackPanel Height="90" Orientation="Horizontal">
+                            <StackPanel HorizontalAlignment="Left" Width="10" Margin="0,10,0,10" Background="{StaticResource okr-color-red}" />
+
+                            <Button Click="OnFeedback" Style="{StaticResource okr-btn-noborder}">
+                                <Button.Content>
+                                    <StackPanel MinWidth="300" Orientation="Vertical" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="意见反馈" Style="{StaticResource okr-title-dark}" />
+                                        <TextBlock Text="期待您的建议，实现更好阅读体验。" Style="{StaticResource okr-tip}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>-->
+
+                        <StackPanel x:Name="spChangePwd" Height="90" Orientation="Horizontal">
+                            <StackPanel HorizontalAlignment="Left" Width="10" Margin="0,10,0,10" Background="{StaticResource okr-color-red}" />
+                            
+                            <Button Click="OnShare" Style="{StaticResource okr-btn-noborder}">
+                                <Button.Content>
+                                    <StackPanel MinWidth="300" Orientation="Vertical" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="分享" Style="{StaticResource okr-title-dark}" />
+                                        <!--<TextBlock Text="把最好的应用分享给最好的朋友。" Style="{StaticResource okr-tip}" />-->
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel x:Name="spSetting" Height="90" Orientation="Horizontal" Margin="0,40,0,0">
+                            <StackPanel HorizontalAlignment="Left" Width="10" Margin="0,10,0,10" Background="{StaticResource okr-color-blue}" />
+
+                            <Button Click="OnSetting" Style="{StaticResource okr-btn-noborder}">
+                                <Button.Content>
+                                    <StackPanel MinWidth="300" Orientation="Vertical" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="设置" Style="{StaticResource okr-title-dark}" />
+                                        <TextBlock Text="Fontsize ,Night mode" Style="{StaticResource okr-tip}" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+
+                        <StackPanel x:Name="spAbout" Height="290" Orientation="Vertical">
+                            <StackPanel HorizontalAlignment="Left" Width="10" Margin="0,10,0,10" Background="{StaticResource okr-color-blue}" />
+                            <SurfaceAdw:SurfaceAdControl Grid.Row="0" Name="surfaceAdImageXaml"
+                             AdPosition="a2973e47900596f139670faa3dd6ccaf" Tap="AdtapControl_Tap" 
+                             AdToken="MF04XWUBNl8wUThaZRc2XzBD"
+                             IsShowCloseIcon="True"
+                             AdRefreshInterval="10"/>
+                          
+                            <google:AdView Tap="AdtapControl_Tap"   x:Name="Ad6Control"  AdUnitID="ca-app-pub-1598808565430684/2935759650"  Format="Banner"></google:AdView>
+                            <TextBlock Margin="0,200,0,0"  x:Name="tb" Style="{StaticResource okr-text}" Text="评价1次之后广告就不会显示了" TextWrapping="Wrap" />
+                            <Button  Foreground="Orange" BorderBrush="Orange" x:Name="reviewbtn" Content="前去评价" Click="Button_Click_1"></Button>
+                            <oxlad:AdControl  Tap="AdtapControl_Tap" x:Name="Ad1Control" ApplicationId="a9101034-badd-42a0-9131-eb9087a83c3c" AdUnitId="f7d92042-3d49-4f0e-9e54-5906ac4b3567"  VerticalAlignment="Bottom" Height="100" IsCloseIconEnabled="True" />
+                            <!--<MsnAD:AdView Tap="AdtapControl_Tap"  Margin="12,21,0,0" TelCapability="True"  x:Name="Ad2Control" StorePic="True" SecretKey="bfac44ffe5c0477a8f52060c9b09a1f1" Adid="190896" Appid="145012" SizeForAd="Normal"></MsnAD:AdView>-->
+                            <google:AdView  Tap="AdtapControl_Tap"  AdUnitID="ca-app-pub-1598808565430684/2935759650"   x:Name="Ad3Control" Format="Banner"></google:AdView>
+                        </StackPanel>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </ctrl:PanoramaItem>
+            
+            <ctrl:PanoramaItem>
+                <phone:LongListSelector LayoutMode="Grid"  x:Name="otherlonglist" GridCellSize="135,135 " >
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="Orange" Margin="12,0,0,12">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" Text="{Binding text}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+                <!--<StackPanel>
+                    <Button  BorderBrush="Orange" Height="100" Width="380" Click="Button_Click" Foreground="Black" Content="民族唱法" Tag="http://baike.baidu.com/view/5382.htm"></Button>
+                    <Button  BorderBrush="Orange" Height="100" Width="380" Click="Button_Click"  Foreground="Black" Content="美声唱法" Tag="http://baike.baidu.com/view/5314.htm"></Button>
+                    <Button  BorderBrush="Orange" Height="100" Width="380" Click="Button_Click"   Foreground="Black" Content="流行唱法" Tag="http://baike.baidu.com/view/434661.htm"></Button>
+                    <Button BorderBrush="Orange" Height="100" Width="380" Click="Button_Click"  Foreground="Black" Content="唱法" Tag="http://baike.baidu.com/view/2365247.htm"></Button>
+                    <Button BorderBrush="Orange" Height="100" Width="380" Click="Button_Click"  Foreground="Black" Content="音乐" Tag="http://baike.baidu.com/subview/5434/9397617.htm"></Button>
+                    <Button BorderBrush="Orange" Height="100" Width="380" Click="Button_Click"  Foreground="Black" Content="演唱技巧" Tag="http://baike.baidu.com/view/562314.htm"></Button>
+                    <google:AdView  x:Name="Ad10Control"  Tap="AdtapControl_Tap"  AdUnitID="ca-app-pub-1598808565430684/2935759650"  Format="Banner"></google:AdView>
+                </StackPanel>-->
+            </ctrl:PanoramaItem>
+            
+            <ctrl:PanoramaItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <phone:LongListSelector Grid.Row="0" x:Name="txtlstbox" LayoutMode="List"  >
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <Border  Margin="0,0,0,12" Width="460" HorizontalAlignment="Left" Height="100" x:Name="txtborder" Background="Orange" Tap="txtborder_Tap">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <!--<Image Stretch="Fill" Height="100"   Grid.Column="0" Source="{Binding picurl}"></Image>-->
+                                        <Grid Grid.Column="1" Margin="12,0,0,0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="65"></RowDefinition>
+                                                <!--<RowDefinition Height="*"></RowDefinition>-->
+                                            </Grid.RowDefinitions>
+                                            <TextBlock FontSize="30" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding text}"></TextBlock>
+                                            <TextBlock   Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding info}"></TextBlock>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                    </phone:LongListSelector>
+                    <StackPanel Grid.Row="1">
+                        <google:AdView  Tap="AdtapControl_Tap"  x:Name="Ad9Control"  AdUnitID="ca-app-pub-1598808565430684/2935759650"  Format="Banner"></google:AdView>
+                    </StackPanel>
+                </Grid>
+               
+            </ctrl:PanoramaItem>
+            <!--<phone:PanoramaItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Button Content="音乐" Click="Button_Click_2"></Button>
+                    </Grid>
+                    <phone:WebBrowser Grid.Row="1" x:Name="wbbaike">
+                        
+                    </phone:WebBrowser>
+                </Grid>
+            </phone:PanoramaItem>-->
+            <phone:PanoramaItem>
+                <phone:LongListSelector LayoutMode="Grid"  x:Name="longlist" GridCellSize="200,150 " >
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="12,0,0,12" Background="Orange">
+                                <TextBlock VerticalAlignment="Center" FontSize="25" HorizontalAlignment="Center" Text="{Binding text}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                </phone:LongListSelector>
+            </phone:PanoramaItem>
+            <ctrl:PanoramaItem>
+             
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Text="五线谱" BorderBrush="Orange" x:Name="box" Width="150"></TextBox>
+                            <Button BorderBrush="Orange" Click="searbtn_Click" Foreground="Orange" x:Name="searbtn" Content="百科搜索"></Button>
+                        <Button BorderBrush="Orange" Click="musicbtn_Click" Foreground="Orange" x:Name="musicbtn" Content="music"></Button>
+                        <Button BorderBrush="Orange" Click="searwenkubtn_Click" Foreground="Orange" x:Name="searwenkubtn" Content="文库搜索"></Button>
+                    </StackPanel>
+                    <phone:WebBrowser IsScriptEnabled="True" Height="660" Source="http://wapwenku.baidu.com/search?word=%E5%94%B1%E6%AD%8C%E6%8A%80%E5%B7%A7" x:Name="wbsearch">
+                            
+                        </phone:WebBrowser>
+                    </StackPanel>
+                    
+                    <!--<oxlad:AdControl x:Name="AdControl" Grid.Row="0" Tap="AdtapControl_Tap" 
+                             IsCloseIconEnabled="True"   
+                             AdUnitId="047361f2-57ac-42a3-836f-7f2822d62e14" Type="Interstitial"
+                             ApplicationId="a9101034-badd-42a0-9131-eb9087a83c3c"/>-->
+              
+            </ctrl:PanoramaItem>
+        </ctrl:Panorama>
+    </Grid>
+</phone:PhoneApplicationPage>
