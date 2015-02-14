@@ -56,19 +56,19 @@
             <phone:LongListSelector x:Name="lstbox" LayoutMode="List"  GridCellSize="150,100">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
-                        <Border Opacity="0.8"  Margin="12,0,0,12"  HorizontalAlignment="Left" Height="100" Background="Orange" Tap="Border_Tap">
+                        <Border Opacity="0.88"  Margin="12,0,0,12"  HorizontalAlignment="Left" Height="100" Background="Orange" Tap="Border_Tap">
                             <Grid MinWidth="460">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Image Stretch="Fill" Height="100"  Grid.Column="0" Source="{Binding picurl}"></Image>
+                                <Image Stretch="Fill" Height="100"  Grid.Column="0" Source="yundong.png"></Image>
                                 <Grid Grid.Column="1" Margin="12,0,0,0">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="50"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
-                                    <TextBlock  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding text}"></TextBlock>
+                                    <TextBlock  Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding text}"></TextBlock>
                                     <TextBlock   Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding info}"></TextBlock>
                                 </Grid>
 
