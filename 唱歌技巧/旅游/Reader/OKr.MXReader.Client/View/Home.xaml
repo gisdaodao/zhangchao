@@ -297,7 +297,7 @@
                             <TextBox Text="五线谱" BorderBrush="Orange" x:Name="box" Width="100"></TextBox>
                             <Button BorderBrush="Orange" Click="searbtn_Click" Foreground="Orange" x:Name="searbtn" Margin="-15,0,0,0" Content="百科搜索"></Button>
                         <Button BorderBrush="Orange" Click="musicbtn_Click" Foreground="Orange" x:Name="musicbtn"  Margin="-15,0,0,0" Content="music"></Button>
-                        <Button BorderBrush="Orange" Click="searwenkubtn_Click" Foreground="Orange" x:Name="searwenkubtn" Content="文库搜索"></Button>
+                        <Button BorderBrush="Orange" Margin="-15,0,0,0" Click="searwenkubtn_Click" Foreground="Orange" x:Name="searwenkubtn" Content="文库搜索"></Button>
                     </StackPanel>
                     <phone:WebBrowser IsScriptEnabled="True" Height="660" Source="http://wapwenku.baidu.com/search?word=%E5%94%B1%E6%AD%8C%E6%8A%80%E5%B7%A7" x:Name="wbsearch">
                             
